@@ -303,7 +303,7 @@ export async function createFormattedMeasurements(measurementData: GraphData): P
         });
     }
 
-    measurementData.graphData.forEach((glucoseMeasurementHistoryEntry: GlucoseItem) =>
+    measurementData.graphData.forEach((glucoseMeasurementHistoryEntry: GraphData) =>
     {
         const entryDate = getUtcDateFromString(glucoseMeasurementHistoryEntry.FactoryTimestamp);
         if (lastEntry === null || entryDate > lastEntry.date)
