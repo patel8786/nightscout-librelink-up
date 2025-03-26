@@ -303,11 +303,14 @@ export async function createFormattedMeasurements(measurementData: GraphData): P
         });
     }
 
-    measurementData.graphData.forEach((glucoseMeasurementHistoryEntry: GraphData) =>
+    logger.debug("lastEntry " + lastEntry);
+    logger.debug("measurementData.graphData.length " + measurementData.graphData.length);
+    measurementData.graphData.forEach((glucoseMeasurementHistoryEntry: GlucoseItem) =>
     {
         const entryDate = getUtcDateFromString(glucoseMeasurementHistoryEntry.FactoryTimestamp);
         if (lastEntry === null || entryDate > lastEntry.date)
         {
+            logger.debug("push historic data " + entryDate);
             formattedMeasurements.push({
                 date: entryDate,
                 sgv: glucoseMeasurementHistoryEntry.ValueInMgPerDl,
