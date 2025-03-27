@@ -303,9 +303,9 @@ export async function createFormattedMeasurements(measurementData: GraphData): P
         });
     }
     if (lastEntry === null) {
-        logger.debug("lastEntry is null");
+        logger.debug(".lastEntry is null");
     } else {
-        logger.debug("lastEntry " + lastEntry.toString());
+        logger.debug(".lastEntry: ", lastEntry);
     }
     logger.debug("measurementData.graphData.length " + measurementData.graphData.length);
     measurementData.graphData.forEach((glucoseMeasurementHistoryEntry: GlucoseItem) =>
