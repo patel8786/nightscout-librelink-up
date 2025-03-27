@@ -11,9 +11,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-      - name: Retag the Docker Image
-        run: docker tag timoschlueter/nightscout-librelink-up:dev patel8786/nightscout-librelink-up:dev
-
+      
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
