@@ -302,7 +302,7 @@ export async function createFormattedMeasurements(measurementData: GraphData): P
             sgv: glucoseMeasurement.ValueInMgPerDl
         });
     }
-    logger.debug("..config.allData ", config.allData);
+    logger.debug(".1.config.allData ", config.allData);
     logger.debug("..measurementDate ", measurementDate);
     if (lastEntry == null) {
         logger.debug("..lastEntry == null");
