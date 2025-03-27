@@ -302,10 +302,16 @@ export async function createFormattedMeasurements(measurementData: GraphData): P
             sgv: glucoseMeasurement.ValueInMgPerDl
         });
     }
-    if (lastEntry === null) {
-        logger.debug(".lastEntry is null");
+    logger.debug("..config.allData ", config.allData);
+    logger.debug("..measurementDate ", measurementDate);
+    if (lastEntry == null) {
+        logger.debug("..lastEntry == null");
+    } else if (lastEntry === null) {
+        logger.debug("..lastEntry is null");
     } else {
-        logger.debug(".lastEntry: ", lastEntry);
+        logger.debug("..lastEntry: ", lastEntry);
+        logger.debug("..lastEntry tostr: ", lastEntry.toString());
+        logger.debug("..lastEntry.date ", lastEntry.date);
     }
     logger.debug("measurementData.graphData.length " + measurementData.graphData.length);
     measurementData.graphData.forEach((glucoseMeasurementHistoryEntry: GlucoseItem) =>
