@@ -53,7 +53,9 @@ const logFormat = printf(({level, message}) =>
 
 const logger = createLogger({
     format: combine(
-        timestamp(),
+        timestamp({
+            format: "DD-MMM-YYYY HH:mm:ss"
+          }),
         logFormat
     ),
     transports: [
@@ -114,8 +116,26 @@ else
     }, {});
 }
 
+const now = new Date();
+
+const options: Intl.DateTimeFormatOptions = {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: false,
+};
+
+const formatted = new Intl.DateTimeFormat("en-GB", options).format(now).replace(",", "");
+
 async function main(): Promise<void>
 {
+    const DATE_TIME_FORMAT = 'DD-MM-YYYY HH:mm:ss'; 
+    let _now: Moment;
+    _now = moment(new Date(), DATE_TIME_FORMAT);
+
     if (!hasValidAuthentication())
     {
         logger.info("renew token");
@@ -307,7 +327,6 @@ export async function createFormattedMeasurements(measurementData: GraphData): P
     if (lastEntry === null) {
         logger.debug("lastEntry is null");
     } else {
-        logger.debug("lastEntry utc " + lastEntry.date);
         const southAfricaTime = new Date(lastEntry.date).toLocaleString("en-ZA", { timeZone: "Africa/Johannesburg" });
         logger.debug("lastEntry SA " + southAfricaTime);
     }
