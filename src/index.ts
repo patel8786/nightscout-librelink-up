@@ -302,32 +302,35 @@ export async function createFormattedMeasurements(measurementData: GraphData): P
             sgv: glucoseMeasurement.ValueInMgPerDl
         });
     }
-    logger.debug(".1.config.allData " + config.allData);
-    logger.debug("..measurementDate " + measurementDate);
-    if (lastEntry == null) {
-        logger.debug("..lastEntry == null");
-    } else if (lastEntry === null) {
-        logger.debug("..lastEntry is null");
+
+    logger.debug("measurementDate " + measurementDate);
+    if (lastEntry === null) {
+        logger.debug("lastEntry is null");
     } else {
-        logger.debug("..lastEntry: " + lastEntry);
-        logger.debug("..lastEntry tostr: " + lastEntry.toString());
-        logger.debug("..lastEntry.date " + lastEntry.date);
+        logger.debug("lastEntry utc " + lastEntry.date);
+        const southAfricaTime = lastEntry.date.toLocaleString("en-ZA", { timeZone: "Africa/Johannesburg" });
+        logger.debug("lastEntry SA " + southAfricaTime);
     }
-    logger.debug("measurementData.graphData.length " + measurementData.graphData.length);
+
     measurementData.graphData.forEach((glucoseMeasurementHistoryEntry: GlucoseItem) =>
     {
         const entryDate = getUtcDateFromString(glucoseMeasurementHistoryEntry.FactoryTimestamp);
+
+        logger.debug("entryDate " + entryDate);
         if (lastEntry === null || entryDate > lastEntry.date)
         {
-            logger.debug("push historic data " + entryDate);
+            logger.debug("push historic data " + glucoseMeasurementHistoryEntry.Timestamp);
             formattedMeasurements.push({
                 date: entryDate,
                 sgv: glucoseMeasurementHistoryEntry.ValueInMgPerDl,
             });
         }
     });
+    
     return formattedMeasurements;
 }
+
+
 
 async function uploadToNightScout(measurementData: GraphData): Promise<void>
 {
