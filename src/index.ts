@@ -308,7 +308,7 @@ export async function createFormattedMeasurements(measurementData: GraphData): P
         logger.debug("lastEntry is null");
     } else {
         logger.debug("lastEntry utc " + lastEntry.date);
-        const southAfricaTime = lastEntry.date.toLocaleString("en-ZA", { timeZone: "Africa/Johannesburg" });
+        const southAfricaTime = new Date(lastEntry.date).toLocaleString("en-ZA", { timeZone: "Africa/Johannesburg" });
         logger.debug("lastEntry SA " + southAfricaTime);
     }
 
@@ -326,7 +326,7 @@ export async function createFormattedMeasurements(measurementData: GraphData): P
             });
         }
     });
-    
+
     return formattedMeasurements;
 }
 
