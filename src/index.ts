@@ -132,10 +132,6 @@ const formatted = new Intl.DateTimeFormat("en-GB", options).format(now).replace(
 
 async function main(): Promise<void>
 {
-    const DATE_TIME_FORMAT = 'DD-MM-YYYY HH:mm:ss'; 
-    let _now: Moment;
-    _now = moment(new Date(), DATE_TIME_FORMAT);
-
     if (!hasValidAuthentication())
     {
         logger.info("renew token");
